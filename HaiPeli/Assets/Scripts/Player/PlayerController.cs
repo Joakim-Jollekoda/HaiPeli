@@ -6,17 +6,27 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-
+    private Vector2 moveInput;
     private MASTER controls;
+    private Rigidbody2D body;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         controls = new MASTER();
+        body = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable(){
+        controls.Enable();
+    }
+    private void onDisable(){
+        controls.Disable();
+    }
+    
+    void FixedUpdate()
     {
-        
+        moveInput = controls.Player.Move.ReadValue<Vector2>();
+        Vector2 movement = new Vector2(moveInput.x, moveInput.y) * moveSpeed * Time.fixedDeltaTime;
+        body.MovePosition(body.position + movement);
     }
 }
