@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public Transform gunTranform;
     public float moveSpeed = 5f;
     private Vector2 moveInput;
     private MASTER controls;
