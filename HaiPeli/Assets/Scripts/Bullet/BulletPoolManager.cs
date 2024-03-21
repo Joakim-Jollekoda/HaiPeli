@@ -25,14 +25,24 @@ private void initializePool()
 
 
 public GameObject GetBullet(){
+   if(bulletpool.Count > 0)
+   { 
+
   GameObject bullet = bulletpool.Dequeue();
   bullet.SetActive(true);
   return bullet;
+   }
+ else{
+  GameObject newBullet = Instantiate(bulletPrefab);
+    newBullet.SetActive(true);
+    return newBullet;
+}
 }
 
 public void ReturnBullet(GameObject bullet){
   bullet.SetActive(false);
   bulletpool.Enqueue(bullet);
-}
+ }
+
 }
 
