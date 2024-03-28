@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public Transform gunTransform;
     public float moveSpeed = 5f;
     private Vector2 moveInput;
+    private Vector2 AimInput;
     private MASTER controls;
     private Rigidbody2D body;
     // Start is called before the first frame update
@@ -36,8 +37,30 @@ public class PlayerController : MonoBehaviour
 
     void Update(){
         Shoot();
+        Aim();
+    }
+    void Aim()
+    {
+        AimInput = controls.Player.Aim.ReadValue<Vector2>();
+        if(AimInput.sqrMagnitude > 0.1){
+        //Debug.Log(AimInput);
+         Vector2 aimDirection = Vector2.zero;  
+         if(UsingMouse()){
+
+         }
+         else{
+            aimDirection = AimInput;
+         }
+        }
     }
 
+
+     bool UsingMouse(){
+        if(Mouse.current.delta.ReadValue().sqrMagnitude > 0.1){
+            return true;
+        }
+        return false;
+     }
         void Shoot()
     {
         if(controls.Player.Shoot.triggered){
