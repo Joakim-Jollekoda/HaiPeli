@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public Transform gunTransform;
+    public Sprite sideSprite;
+    public Sprite topSprite;
+    private SpriteRenderer spriteRenderer;
     public float moveSpeed = 5f;
     private Vector2 moveInput;
     private Vector2 AimInput;
@@ -16,6 +19,7 @@ public class PlayerController : MonoBehaviour
     {
         controls = new MASTER();
         body = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable(){
@@ -38,6 +42,18 @@ public class PlayerController : MonoBehaviour
     void Update(){
         Shoot();
         Aim();
+        UpdateSpriteDirection();
+    }
+    private void UpdateSpriteDirection()
+    {
+        if(moveInput.sqrMagnitude > 0.1f){
+            if(Mathf.Abs(moveInput.x) > Mathf.Abs(moveInput.y)){
+                spriteRenderer.sprite = sideSprite;
+            }
+            else{
+                spriteRenderer.sprite = topSprite;
+            }
+        }
     }
     void Aim()
     {
