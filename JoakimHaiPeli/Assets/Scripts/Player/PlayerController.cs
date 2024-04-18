@@ -49,9 +49,12 @@ public class PlayerController : MonoBehaviour
         if(moveInput.sqrMagnitude > 0.1f){
             if(Mathf.Abs(moveInput.x) > Mathf.Abs(moveInput.y)){
                 spriteRenderer.sprite = sideSprite;
+                spriteRenderer.flipX = moveInput.x < 0;
+                spriteRenderer.flipY = false;
             }
             else{
                 spriteRenderer.sprite = topSprite;
+                spriteRenderer.flipY = moveInput.y < 0;
             }
         }
     }
