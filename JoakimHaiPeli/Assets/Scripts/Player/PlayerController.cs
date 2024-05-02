@@ -21,7 +21,9 @@ public class PlayerController : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
+    void Start(){
+        GameManager.Instance.playerController = this;
+    }
     private void OnEnable(){
         controls.Enable();
     }
